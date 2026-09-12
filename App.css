@@ -1,0 +1,189 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  overflow: hidden;
+  background: #050816;
+}
+
+.App {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 140, 255, 0.20), transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(150, 50, 255, 0.20), transparent 30%),
+    linear-gradient(135deg, #050816, #0a1028 50%, #070b1c);
+}
+
+/* ---------- 3D GRID ---------- */
+
+.App::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+
+  background-image:
+    linear-gradient(rgba(80, 150, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80, 150, 255, 0.08) 1px, transparent 1px);
+
+  background-size: 55px 55px;
+
+  transform: perspective(500px) rotateX(60deg);
+  transform-origin: center;
+
+  animation: gridMove 12s linear infinite;
+}
+
+@keyframes gridMove {
+  from {
+    transform: perspective(500px) rotateX(60deg)
+      translateY(0);
+  }
+
+  to {
+    transform: perspective(500px) rotateX(60deg)
+      translateY(55px);
+  }
+}
+
+/* ---------- GLOWING 3D ORBS ---------- */
+
+.App::after {
+  content: "";
+  position: absolute;
+
+  width: 450px;
+  height: 450px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      white 0%,
+      #55c7ff 8%,
+      #087cff 35%,
+      #5218ff 65%,
+      transparent 72%
+    );
+
+  filter: blur(2px);
+
+  opacity: 0.45;
+
+  top: -160px;
+  right: -100px;
+
+  box-shadow:
+    0 0 80px #087cff,
+    0 0 160px rgba(80, 50, 255, 0.6);
+
+  animation: orbFloat 8s ease-in-out infinite;
+}
+
+@keyframes orbFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-60px, 50px) scale(1.08);
+  }
+}
+
+/* ---------- CONTENT ---------- */
+
+.App > * {
+  position: relative;
+  z-index: 5;
+}
+
+/* ---------- TITLE ---------- */
+
+.App h1 {
+  font-size: 55px;
+  margin: 10px;
+
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #70c8ff,
+    #b28cff
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:
+    0 0 20px rgba(80, 180, 255, 0.3);
+
+  letter-spacing: 1px;
+}
+
+/* ---------- TEXT ---------- */
+
+.App p {
+  color: #cbd5e1;
+  font-size: 20px;
+}
+
+/* ---------- GLASS BUTTONS ---------- */
+
+button {
+  padding: 12px 24px;
+  margin: 8px;
+
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+
+  color: white;
+
+  background: rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,0.3),
+    inset 0 1px rgba(255,255,255,0.15);
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-4px);
+
+  background: rgba(70,160,255,0.25);
+
+  box-shadow:
+    0 0 25px rgba(50,160,255,0.5),
+    0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 600px) {
+
+  .App h1 {
+    font-size: 38px;
+  }
+
+  .App p {
+    font-size: 17px;
+  }
+}
